@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ContextCalories from '../context/contextCalories';
 
 export default function Form() {
+  const context = useContext(ContextCalories);
+  const {
+    type,
+    calories,
+    date,
+    食事,
+    setType,
+    setCalories,
+    setDate,
+    set食事,
+  } = context;
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // ...sua lógica
+    const object = {
+      type,
+      calories,
+      date,
+    };
+    set食事([...食事, object]);
   };
 
   return (
@@ -16,7 +34,7 @@ export default function Form() {
         <select
           id="meal"
           defaultValue="Café da manhã"
-          onChange={() => {}} // sua lógica...
+          onChange={({ target: { value } }) => setType(value)} // sua lógica...
         >
           <option value="Café da manhã">Café da manhã</option>
           <option value="Lanche da manhã">Lanche da manhã</option>
@@ -36,7 +54,8 @@ export default function Form() {
           id="calories"
           type="number"
           placeholder="ex: 400"
-          onChange={() => {}} // sua lógica...
+          defaultValue="1"
+          onChange={({ target: { value } }) => setCalories(value)} // sua lógica...
         />
       </label>
 
@@ -48,7 +67,8 @@ export default function Form() {
         <input
           id="date"
           type="date"
-          onChange={() => {}} // sua lógica...
+          defaultValue="2023-01-01"
+          onChange={({ target: { value } }) => setDate(value)} // sua lógica...
         />
       </label>
 

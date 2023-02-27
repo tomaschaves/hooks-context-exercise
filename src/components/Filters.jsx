@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import ContextCalories from '../context/contextCalories';
 
 export default function Filters() {
+  const context = useContext(ContextCalories);
+  const {
+    食事,
+    setFilter,
+    setfilteredFood,
+    setfilteredDate,
+  } = context;
+
+  const optionsFilter = () => {
+    const newArray = 食事.map(((食) => 食.type))
+      .filter((value, index, self) => self.indexOf(value) === index);
+    return newArray;
+  };
+
+  // const mealsFilter = ({ target: { value } } => {
+  //   console.log
+  //   // setFilter(食事
+  //   //     .filter((element) => element.type === value))
+  // });
+  const resetFilter = () => {
+    setfilteredDate('');
+    setfilteredFood('');
+  };
+
   return (
     <form className="flex">
 
@@ -9,15 +34,14 @@ export default function Filters() {
         <select
           id="meal"
           defaultValue=""
-          onChange={() => {}} // sua lógica...
+          onChange={({ target: { value } }) => setfilteredFood(value)} // sua lógica...
         >
-          <option value="">Todas as refeições</option>
-          <option value="Café da manhã">Café da manhã</option>
-          <option value="Lanche da manhã">Lanche da manhã</option>
-          <option value="Almoço">Almoço</option>
-          <option value="Lanche da tarde">Lanche da tarde</option>
-          <option value="Janta">Janta</option>
-          <option value="Ceia">Ceia</option>
+          <option value="" defaultValue="">Todas as refeições</option>
+          {
+          optionsFilter().map((option) => (
+            <option value={option} key={option}>{option}</option>
+          ))
+          }
         </select>
       </label>
 
@@ -26,13 +50,13 @@ export default function Filters() {
         <input
           id="date"
           type="date"
-          onChange={() => {}} // sua lógica...
+          onChange={({ target: { value } }) => setfilteredDate(value)} // sua lógica...
         />
       </label>
 
       <button
         type="button"
-        onClick={() => {}} // sua lógica...
+        onClick={resetFilter} // sua lógica...
       >
         Limpar Filtros
       </button>
