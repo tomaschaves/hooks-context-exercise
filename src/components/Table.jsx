@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ContextCalories from '../context/contextCalories';
 
 export default function Table() {
@@ -7,12 +7,13 @@ export default function Table() {
     食事,
     filteredFood,
     filteredDate,
+    食事Filter,
+    set食事Filter,
   } = context;
 
   // console.log(食事)
   // console.log(filteredFood)
   // console.log(filteredDate)
-  const [食事Filter, set食事Filter] = useState([]);
   useEffect(() => {
     if (filteredDate.length !== 0 && filteredFood.length === 0) {
       set食事Filter(食事.filter((element) => element.date === filteredDate));
@@ -24,7 +25,7 @@ export default function Table() {
     } else if (!(filteredFood && filteredDate)) {
       set食事Filter(食事);
     }
-  }, [食事, filteredDate, filteredFood]);
+  }, [食事, filteredDate, filteredFood, set食事Filter]);
   // console.log(!(filteredFood && filteredDate));
   // console.log(filteredDate);
   // set食事Filter(食事.filter((element) => element.type === 'Lanche da tarde'));

@@ -9,6 +9,7 @@ function CaloriesProvider({ children }) {
   const [食事, set食事] = useState([]);
   const [filteredFood, setfilteredFood] = useState('');
   const [filteredDate, setfilteredDate] = useState('');
+  const [食事Filter, set食事Filter] = useState([]);
   const contextValue = useMemo(() => ({
     type,
     calories,
@@ -16,13 +17,15 @@ function CaloriesProvider({ children }) {
     食事,
     filteredFood,
     filteredDate,
+    食事Filter,
     setType,
     setCalories,
     setDate,
     set食事,
     setfilteredFood,
     setfilteredDate,
-  }), [type, calories, date, 食事, filteredFood, filteredDate]);
+    set食事Filter,
+  }), [type, calories, date, 食事, filteredFood, filteredDate, 食事Filter]);
 
   return (
     <ContextCalories.Provider value={contextValue}>
